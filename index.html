@@ -1776,10 +1776,11 @@ async function startGame(){
   results=[];
   currentQ=0;
   showScreen('s-game');
-  document.getElementById('load-ov').innerHTML='<div class="spinner"></div><span style="margin-top:8px">AI 正在挑選全球知名人物…</span>';
-  document.getElementById('load-ov').className='load-overlay';
-  const list = await generateCelebList(turnOrder.length);
-  questions = list;
+  // 立即從內建1300+人題庫出題，不等待AI，確保秒開始
+  const avail = shuffle(CELEBS.filter(c => !window._aiUsed.has(c.name)));
+  const pool = avail.length >= turnOrder.length ? avail : shuffle([...CELEBS]);
+  questions = pool.slice(0, turnOrder.length);
+  questions.forEach(c => window._aiUsed.add(c.name));
   loadQuestion();
 }
 
