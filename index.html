@@ -205,14 +205,21 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;background:#000;c
         <button id="time-8" onclick="setPhotoSecs(8)" style="flex:1;padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.76rem;cursor:pointer;">8秒</button>
       </div>
 
+      <!-- 每人答題輪數 -->
+      <div class="setup-label" style="margin-top:6px;">每人答題輪數</div>
+      <div style="display:flex;gap:8px;width:100%;">
+        <button id="rounds-2" onclick="setRounds(2)" style="flex:1;padding:8px 4px;border-radius:10px;border:2px solid #ff5c93;background:linear-gradient(135deg,#ff5c93,#7b5cff);color:#fff;font-family:inherit;font-weight:900;font-size:.76rem;cursor:pointer;">2輪</button>
+        <button id="rounds-3" onclick="setRounds(3)" style="flex:1;padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.76rem;cursor:pointer;">3輪</button>
+        <button id="rounds-4" onclick="setRounds(4)" style="flex:1;padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.76rem;cursor:pointer;">4輪</button>
+        <button id="rounds-5" onclick="setRounds(5)" style="flex:1;padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.76rem;cursor:pointer;">5輪</button>
+      </div>
+
       <!-- 題目主題 -->
       <div class="setup-label" style="margin-top:6px;">題目主題</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;">
         <button id="cat-all" onclick="setCategory('all')" style="padding:8px 4px;border-radius:10px;border:2px solid #f0e040;background:linear-gradient(135deg,#f0e040,#ff9500);color:#fff;font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">🌍 隨機綜合</button>
-        <button id="cat-sport" onclick="setCategory('sport')" style="padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">⚽ 體育明星</button>
         <button id="cat-music" onclick="setCategory('music')" style="padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">🎵 音樂歌手</button>
         <button id="cat-movie" onclick="setCategory('movie')" style="padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">🎬 影視明星</button>
-        <button id="cat-history" onclick="setCategory('history')" style="padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">👑 政治歷史</button>
         <button id="cat-asia" onclick="setCategory('asia')" style="padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">🌏 亞洲限定</button>
         <button id="cat-hktw" onclick="setCategory('hktw')" style="padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">🎤 港台老中青</button>
         <button id="cat-idol" onclick="setCategory('idol')" style="padding:8px 4px;border-radius:10px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-family:inherit;font-weight:900;font-size:.72rem;cursor:pointer;">✨ 日韓偶像</button>
@@ -1510,8 +1517,6 @@ const CELEBS = [
   {name:"Babymetal",zh:"BABYMETAL",hint:"\u65e5\u672c\u91d1\u5c6c\u5076\u50cf\u5718\u9ad4\uff0c\u7368\u7279\u66f2\u98a8\u805e\u540d\u570b\u969b",wiki:"Babymetal",cats:[],asia:true,idol:true,is_group:true},
   {name:"Nogizaka46",zh:"\u4e43\u6728\u574246",hint:"\u65e5\u672c\u5927\u578b\u5076\u50cf\u5973\u5718",wiki:"Nogizaka46",cats:["music"],asia:true,idol:true,is_group:true},
   {name:"Keyakizaka46",zh:"\u6b05\u574246",hint:"\u65e5\u672c\u5076\u50cf\u5973\u5718",wiki:"Keyakizaka46",cats:["music"],asia:true,idol:true,is_group:true},
-  {name:"Hikakin",zh:"HIKAKIN",hint:"\u65e5\u672c\u6700\u77e5\u540dYouTuber\u4e4b\u4e00",wiki:"Hikakin",cats:[],asia:true,idol:true},
-  {name:"Fischer's",zh:"Fischer's",hint:"\u65e5\u672c\u4eba\u6c23YouTuber\u5718\u9ad4",wiki:"Fischer's",cats:[],asia:true},
   {name:"Jang Wonyoung",zh:"\u5f35\u5143\u82f1",hint:"IVE\u968a\u9577\uff0c\u97d3\u570b\u65b0\u751f\u4ee3\u5973\u5718\u9802\u6d41",wiki:"Jang_Wonyoung",cats:["sport", "music"],asia:true,idol:true,fame:3},
   {name:"Karina (aespa)",zh:"\u67f3\u667a\u654f",hint:"aespa\u968a\u9577\uff0c\u7576\u4ee3K-pop\u9802\u6d41\u5973\u661f",wiki:"Karina_(singer)",cats:["sport", "music", "movie"],asia:true,idol:true,fame:3},
   {name:"Winter (aespa)",zh:"\u91d1\u739f\u5ead",hint:"aespa\u6210\u54e1\uff0c\u4e3b\u5531\u5be6\u529b\u51fa\u8272",wiki:"Winter_(singer)",cats:["music"],asia:false,idol:true,fame:3},
@@ -1669,18 +1674,7 @@ const CELEBS = [
   {name:"Joseph Wu",zh:"\u5433\u91e7\u71ee",hint:"\u53f0\u7063\u524d\u5916\u4ea4\u90e8\u9577",wiki:"Joseph_Wu",cats:["history"],asia:true,hktw:true,gen:"mid"},
   {name:"Lin Chia-lung",zh:"\u6797\u4f73\u9f8d",hint:"\u53f0\u7063\u73fe\u4efb\u5916\u4ea4\u90e8\u9577\uff0c\u524d\u53f0\u4e2d\u5e02\u9577",wiki:"Lin_Chia-lung",cats:["history"],asia:true,hktw:true,gen:"mid"},
   {name:"Bi-khim Hsiao",zh:"\u856d\u7f8e\u7434",hint:"\u53f0\u7063\u73fe\u4efb\u526f\u7e3d\u7d71",wiki:"Hsiao_Bi-khim",cats:["history"],asia:true,hktw:true,gen:"mid"},
-  {name:"HowHow",zh:"How\u54e5",hint:"\u53f0\u7063\u4eba\u6c23YouTuber\uff0c\u53cd\u5dee\u840c\u800d\u5ee2\u98a8\u683c",wiki:"HowHow",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Eric Chou (YouTuber)",zh:"\u8521\u963f\u560e",hint:"\u53f0\u7063\u8cc7\u6df1YouTuber\uff0c\u641e\u7b11\u751f\u6d3b\u98a8\u683c",wiki:"Tsai_A-ga",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Joeman",zh:"\u557e\u557e\u978b",hint:"\u53f0\u7063\u4eba\u6c23YouTuber\uff0c\u958b\u7bb1\u5be6\u6e2c\u5f71\u7247\u805e\u540d",wiki:"Joeman",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Ban Ban Show",zh:"\u73ed\u73ed",hint:"\u53f0\u7063YouTuber\uff0c\u751f\u6d3b\u5a1b\u6a02\u983b\u9053",wiki:"Ban_Ban_Show",cats:[],asia:true,hktw:true,gen:"young"},
   {name:"Toyz",zh:"Toyz",hint:"\u53f0\u7063\u96fb\u7af6\u9078\u624b\uff0c\u82f1\u96c4\u806f\u76df\u4e16\u754c\u51a0\u8ecd\u968a\u6210\u54e1",wiki:"Toyz",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Pan Ren-mu",zh:"\u53cd\u9aa8\u7537\u5b69",hint:"\u53f0\u7063YouTuber\u5718\u9ad4\uff0c\u60e1\u6574\u6574\u4eba\u7cfb\u5217",wiki:"Rebellious_Boys",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Potter King",zh:"\u6ce2\u7279\u738b",hint:"\u53f0\u7063YouTuber\uff0c\u904a\u6232\u5be6\u6cc1\u805e\u540d",wiki:"Potter_King",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Pa Pa Ya Banana",zh:"\u6728\u66dc4\u8d85\u73a9",hint:"\u53f0\u7063\u7d9c\u85ddYouTube\u983b\u9053\uff0c\u53cd\u6b63\u6211\u5f88\u9592\u6210\u54e1",wiki:"Thursdayz",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Wacko",zh:"\u53cd\u6b63\u6211\u5f88\u9592",hint:"\u53f0\u7063\u641e\u7b11YouTuber\u5718\u9ad4\uff0cKUSO\u77ed\u5287\u805e\u540d",wiki:"\u53cd\u6b63\u6211\u5f88\u9592",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Cheap",zh:"\u557e\u557e",hint:"\u53f0\u7063YouTuber\uff0c\u60e1\u6574\u60e1\u4f5c\u5287\u5f71\u7247\u4ee3\u8868",wiki:"Cheap_(YouTuber)",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Internet Phenomenon",zh:"\u7db2\u7d05\u5c0f\u7389",hint:"\u53f0\u7063\u7db2\u7d05\uff0cDeepFake\u63db\u81c9\u722d\u8b70\u4e8b\u4ef6\u4e3b\u89d2",wiki:"Xiaoyu_(internet_celebrity)",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Wei Wuyan",zh:"\u5343\u5343\u9032\u98df\u4e2d",hint:"\u53f0\u7063\u5927\u80c3\u738b\u7f8e\u98dfYouTuber",wiki:"Qianqian",cats:[],asia:true,hktw:true,gen:"young"},
   {name:"Test Video",zh:"\u53e4\u963f\u83ab",hint:"\u53f0\u7063KUSO\u60e1\u641e\u5f71\u7247\u5275\u4f5c\u8005",wiki:"Ku_A-mo",cats:[],asia:true,hktw:true,gen:"young"},
   {name:"Chen Han-dian",zh:"\u9673\u6f22\u5178",hint:"\u53f0\u7063\u8ae7\u661f\u6f14\u54e1\uff0c\u5433\u5b97\u61b2\u611b\u5c07",wiki:"Chen_Han-tien",cats:[],asia:true,hktw:true,gen:"young"},
   {name:"Eddie Huang (host)",zh:"\u9ec3\u8c6a\u5e73",hint:"\u53f0\u7063\u4e3b\u6301\u4eba\uff0c\u53cd\u61c9\u5feb\u53c8\u6562\u8aaa",wiki:"Huang_Hao-ping",cats:[],asia:true,hktw:true,gen:"young"},
@@ -1698,13 +1692,7 @@ const CELEBS = [
   {name:"Huang Wei-cher",zh:"\u9ec3\u5049\u54f2",hint:"\u53f0\u5357\u5e02\u9577",wiki:"Huang_Wei-cher",cats:["history"],asia:true},
   {name:"Weng Chang-liang",zh:"\u7fc1\u7ae0\u6881",hint:"\u5609\u7fa9\u7e23\u9577",wiki:"Weng_Chang-liang",cats:[],asia:true},
   {name:"Imbcsj",zh:"\u9019\u7fa4\u4eba",hint:"\u53f0\u7063\u77ed\u5287\u5275\u4f5c\u5718\u9ad4\uff0cKUSO\u65e5\u5e38\u7cfb\u5217",wiki:"This_Group_of_People",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Wenny Tsai",zh:"\u6b50\u967d\u59ae\u59ae",hint:"\u53f0\u7063\u7db2\u7d05\uff0c\u6b50\u967d\u5bb6\u65cf\u6210\u54e1",wiki:"Ouyang_Nini",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"PressPlay Studio",zh:"\u7406\u79d1\u592a\u592a",hint:"\u53f0\u7063\u77e5\u8b58\u578bYouTuber\uff0c\u7406\u6027\u5206\u6790\u751f\u6d3b\u8b70\u984c",wiki:"Rikejotai",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Yt Crab",zh:"\u8d85\u7c92\u65b9",hint:"\u53f0\u7063\u79d1\u666e\u77e5\u8b58\u578bYouTuber",wiki:"Chao_Li_Fang",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Why Animation",zh:"why why why",hint:"\u53f0\u7063\u77e5\u8b58\u52d5\u756bYouTuber",wiki:"Why_Animation",cats:[],asia:true,hktw:true,gen:"young"},
   {name:"Uu Studio",zh:"prince",hint:"\u53cd\u9aa8\u7537\u5b69\u6210\u54e1",wiki:"Prince_Rebellious",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"6 Studios",zh:"\u516d\u6307\u6df5",hint:"\u53f0\u7063\u7279\u6548\u96fb\u5f71\u5275\u4f5cYouTuber",wiki:"Liuzhiyuan",cats:[],asia:true,hktw:true,gen:"young"},
-  {name:"Vivi Bear",zh:"\u8521\u6843\u8cb4",hint:"\u8521\u963f\u560e\u4e4b\u5b50\uff0c\u53f0\u7063\u6700\u77e5\u540d\u7db2\u7d05\u5e7c\u5152",wiki:"Cai_Taogui",cats:[],asia:true,hktw:true,gen:"young"},
   {name:"Niko Edwards",zh:"NiQ",hint:"\u53f0\u7063\u96fb\u7af6\u5be6\u6cc1\u4e3b",wiki:"Niko_Edwards",cats:[],asia:true,hktw:true,gen:"young"},
   {name:"Wu Yen-hsun",zh:"\u5433\u5f65\u7956",hint:"\u7121\u9593\u9053\u7cfb\u5217\uff0c\u53f0\u7f8e\u6df7\u8840\u7537\u661f",wiki:"Daniel_Wu",cats:["movie"],asia:true,hktw:true,gen:"mid",fame:2},
   {name:"Bea Hayden Kuo",zh:"\u90ed\u78a7\u5a77",hint:"\u53f0\u7063\u5973\u6f14\u54e1\uff0c\u8de8\u8db3\u5927\u9678\u5e02\u5834",wiki:"Bea_Hayden_Kuo",cats:["movie"],asia:true,hktw:true,gen:"young"},
@@ -1923,12 +1911,12 @@ const CELEBS = [
   {name:"Sakurai Sho Idol",zh:"\u633d\u4e95\u7fd4",hint:"\u5d50\u6210\u54e1\uff0c\u65e5\u672c\u570b\u6c11\u5076\u50cf\u4e3b\u6301\u4eba",wiki:"Sho_Sakurai",cats:["music"],asia:true,idol:true},
   {name:"Yui Aragaki Idol",zh:"\u65b0\u57a2\u7d50\u8863",hint:"\u9003\u6065\u5973\u4e3b\u89d2\uff0c\u65e5\u672c\u570b\u6c11\u8001\u5a46\u7a31\u865f\u7684\u5973\u661f",wiki:"Yui_Aragaki",cats:["movie"],asia:true,idol:true},
   {name:"NCT Haechan",zh:"\u674e\u5e1d\u52aa",hint:"NCT\u6210\u54e1",wiki:"Haechan",cats:["music"],asia:true,idol:true},
-  {name:"CORTIS",zh:"CORTIS",hint:"BTS\u5e2b\u5f1f\u5718\uff0cHYBE\u6642\u9694\u516d\u5e74\u63a8\u51fa\u7684\u5168\u65b0\u7537\u5718",wiki:"Cortis_(group)",cats:["music"],asia:true,idol:true,is_group:true,fame:3},
-  {name:"Martin (CORTIS)",zh:"\u6734\u5b87\u5b99",hint:"CORTIS\u968a\u9577\uff0c\u97d3\u88d4\u52a0\u62ff\u5927\u4eba\uff0c190\u516c\u5206\u8996\u89ba\u64d4\u7576",wiki:"Martin_(singer)",cats:["music"],asia:true,idol:true,fame:3},
-  {name:"James (CORTIS)",zh:"\u8d99\u96e8\u51e1",hint:"CORTIS\u6210\u54e1\uff0c\u53f0\u7063\u9577\u5927\u7684\u6df7\u8840\u5927\u54e5\uff0c\u591a\u570b\u8a9e\u8a00\u80fd\u624b",wiki:"James_(singer)",cats:["music"],asia:true,hktw:true,idol:true,fame:3},
-  {name:"Juhoon (CORTIS)",zh:"\u91d1\u4e3b\u8a13",hint:"CORTIS\u6210\u54e1\uff0c\u7ae5\u6a21\u51fa\u8eab\uff0c\u4f4e\u97f3\u55d3\u97f3\u7279\u8272",wiki:"Juhoon",cats:["music"],asia:true,idol:true,fame:3},
-  {name:"Seonghyeon (CORTIS)",zh:"\u56b4\u6210\u73b9",hint:"CORTIS\u6210\u54e1\uff0c\u968a\u5167\u4e3b\u5531\u8207\u8a5e\u66f2\u5275\u4f5c\u6838\u5fc3",wiki:"Seonghyeon",cats:["music"],asia:true,idol:true,fame:3},
-  {name:"Keonho (CORTIS)",zh:"\u5b89\u4e7e\u93ac",hint:"CORTIS\u5fd9\u5167\uff0c\u795e\u4f3c\u8eca\u9280\u512a\u7684\u8996\u89ba\u64d4\u7576",wiki:"Keonho",cats:["music"],asia:true,idol:true,fame:3},
+  {name:"CORTIS",zh:"CORTIS",hint:"BTS\u5e2b\u5f1f\u5718\uff0cHYBE\u6642\u9694\u516d\u5e74\u63a8\u51fa\u7684\u5168\u65b0\u7537\u5718",wiki:"Cortis",cats:["music"],asia:true,idol:true,is_group:true,fame:3},
+  {name:"Martin (CORTIS)",zh:"\u6734\u5b87\u5b99",hint:"CORTIS\u968a\u9577\uff0c\u97d3\u88d4\u52a0\u62ff\u5927\u4eba\uff0c190\u516c\u5206\u8996\u89ba\u64d4\u7576",wiki:"",cats:["music"],asia:true,idol:true,fame:3,no_img:true},
+  {name:"James (CORTIS)",zh:"\u8d99\u96e8\u51e1",hint:"CORTIS\u6210\u54e1\uff0c\u53f0\u7063\u9577\u5927\u7684\u6df7\u8840\u5927\u54e5\uff0c\u591a\u570b\u8a9e\u8a00\u80fd\u624b",wiki:"",cats:["music"],asia:true,hktw:true,idol:true,fame:3,no_img:true},
+  {name:"Juhoon (CORTIS)",zh:"\u91d1\u4e3b\u8a13",hint:"CORTIS\u6210\u54e1\uff0c\u7ae5\u6a21\u51fa\u8eab\uff0c\u4f4e\u97f3\u55d3\u97f3\u7279\u8272",wiki:"",cats:["music"],asia:true,idol:true,fame:3,no_img:true},
+  {name:"Seonghyeon (CORTIS)",zh:"\u56b4\u6210\u73b9",hint:"CORTIS\u6210\u54e1\uff0c\u968a\u5167\u4e3b\u5531\u8207\u8a5e\u66f2\u5275\u4f5c\u6838\u5fc3",wiki:"",cats:["music"],asia:true,idol:true,fame:3,no_img:true},
+  {name:"Keonho (CORTIS)",zh:"\u5b89\u4e7e\u93ac",hint:"CORTIS\u5fd9\u5167\uff0c\u795e\u4f3c\u8eca\u9280\u512a\u7684\u8996\u89ba\u64d4\u7576",wiki:"",cats:["music"],asia:true,idol:true,fame:3,no_img:true},
   {name:"Rei (IVE)",zh:"\u30ec\u30a4",hint:"IVE\u65e5\u7c4d\u6210\u54e1",wiki:"Rei_(singer)",cats:["music"],asia:true,idol:true,fame:3},
   {name:"Snow Man",zh:"Snow Man",hint:"\u5091\u5c3c\u65af\u7cfb\u4e5d\u4eba\u7537\u5718\uff0c2025\u5e74\u9996\u6b21\u7ad9\u4e0a\u65e5\u672c\u570b\u7acb\u7af6\u6280\u5834",wiki:"Snow_Man",cats:["music"],asia:true,idol:true,is_group:true,fame:2},
   {name:"Iwamoto Hikaru",zh:"\u5ca9\u672c\u7167",hint:"Snow Man\u968a\u9577",wiki:"Hikaru_Iwamoto",cats:["music"],asia:true,idol:true},
@@ -2076,7 +2064,7 @@ const CELEBS = [
   {name:"Power Tan",zh:"\u52d5\u529b\u706b\u8eca\u5c24\u79cb\u8208",hint:"\u52d5\u529b\u706b\u8eca\u6210\u54e1",wiki:"You_Qiu_Xing_2",cats:["music"],asia:true,hktw:true},
   {name:"Sun Yang TW",zh:"\u5f35\u9707\u5dbd",hint:"\u53f0\u7063\u6416\u6efe\u5275\u4f5c\u6b4c\u624b\uff0cMC HotDog\u597d\u53cb",wiki:"Chang_Chen-yue",cats:["music"],asia:true,hktw:true},
   {name:"MC HotDog",zh:"MC\u71b1\u72d7",hint:"\u53f0\u7063\u563b\u54c8\u9952\u820c\u6559\u7236\u7d1a\u4eba\u7269",wiki:"MC_HotDog",cats:["music"],asia:true,hktw:true},
-  {name:"Soft Lipa",zh:"\u86cb\u5821",hint:"\u53f0\u7063\u6587\u9752\u563b\u54c8\u4ee3\u8868",wiki:"Soft_Lipa",cats:["music"],asia:true,hktw:true},
+  {name:"Soft Lipa",zh:"\u86cb\u5821",hint:"\u53f0\u7063\u6587\u9752\u563b\u54c8\u4ee3\u8868",wiki:"",cats:["music"],asia:true,hktw:true,zh_wiki:"\u86cb\u5821_(\u97f3\u6a02\u4eba)"},
   {name:"Dwagie",zh:"\u5927\u652f",hint:"\u53f0\u7063\u563b\u54c8\u9952\u820c\u6559\u7236\u7d1a\u4eba\u7269",wiki:"Dwagie",cats:["music"],asia:true,hktw:true},
   {name:"Miss Ko",zh:"\u845b\u4ef2\u73ca",hint:"\u53f0\u7063\u9952\u820c\u5973\u6b4c\u624b",wiki:"Miss_Ko",cats:["music"],asia:true,hktw:true},
   {name:"Leo Wang",zh:"\u738b\u5609\u723e",hint:"GOT7\u6210\u54e1\uff0c\u9999\u6e2f\u88d4\u97d3\u570b\u5076\u50cf\u6b4c\u624b",wiki:"Jackson_Wang",cats:["music"],asia:true,hktw:true,idol:true},
@@ -2091,7 +2079,64 @@ const CELEBS = [
   {name:"Chen Kuan-yu",zh:"\u9673\u51a0\u5b87",hint:"\u53f0\u7063\u8077\u68d2\u6295\u624b",wiki:"Chen_Kuan-yu",cats:["sport"],asia:true,hktw:true},
   {name:"Cheng Yu-min",zh:"\u912d\u5b87\u6607",hint:"\u53f0\u7063\u6392\u7403\u9078\u624b",wiki:"Cheng_Yu-min",cats:["sport"],asia:true,hktw:true},
   {name:"Lisa Su",zh:"\u8607\u59ff\u4e30",hint:"AMD\u57f7\u884c\u9577\uff0c\u53f0\u88d4\u7f8e\u7c4d\u79d1\u6280\u5973\u5f37\u4eba",wiki:"Lisa_Su",cats:["history"],asia:true,hktw:true},
-  {name:"Min Kao",zh:"\u9ad8\u6c11\u74b0",hint:"Garmin\u5171\u540c\u5275\u8fa6\u4eba\uff0c\u53f0\u88d4\u7f8e\u7c4d\u4f01\u696d\u5bb6",wiki:"Min_Kao",cats:["history"],asia:true,hktw:true}
+  {name:"Min Kao",zh:"\u9ad8\u6c11\u74b0",hint:"Garmin\u5171\u540c\u5275\u8fa6\u4eba\uff0c\u53f0\u88d4\u7f8e\u7c4d\u4f01\u696d\u5bb6",wiki:"Min_Kao",cats:["history"],asia:true,hktw:true},
+  {name:"Chen Yi-wen",zh:"\u9673\u4ee5\u6587",hint:"\u53f0\u7063\u8cc7\u6df1\u6f14\u54e1\u5c0e\u6f14\uff0c\u591a\u90e8\u570b\u7247\u4ee3\u8868\u4f5c",wiki:"Chen_Yi-wen",cats:["movie"],asia:true,hktw:true},
+  {name:"Chang Shao-huai",zh:"\u5f35\u5c11\u61f7",hint:"\u53f0\u7063\u8cc7\u6df1\u7537\u6f14\u54e1",wiki:"Chang_Shao-huai",cats:["movie"],asia:true,hktw:true},
+  {name:"Tien Hsin",zh:"\u7530\u99a5\u75042",hint:"S.H.E\u6210\u54e1\uff0c\u500b\u4eba\u767c\u5c55\u540c\u6a23\u4eae\u773c\u7684\u5275\u4f5c\u6b4c\u624b",wiki:"Hebe_Tien_2",cats:["music"],asia:true,hktw:true},
+  {name:"King Shih",zh:"\u65bd\u540d\u5e25",hint:"\u53f0\u7063\u8cc7\u6df1\u7537\u6a21\u7279\u6f14\u54e1",wiki:"King_Shih",cats:["movie"],asia:true,hktw:true},
+  {name:"Mavis Fan",zh:"\u8303\u66c9\u8431",hint:"\u53f0\u7063\u8cc7\u6df1\u6b4c\u624b\uff0c\u5f9e\u7ae5\u661f\u8f49\u578b\u5be6\u9a57\u97f3\u6a02\u5275\u4f5c\u8005",wiki:"Mavis_Fan",cats:["music"],asia:true,hktw:true},
+  {name:"Sun Shu-mei",zh:"\u5b6b\u6dd1\u5a9a",hint:"\u53f0\u7063\u8cc7\u6df1\u5973\u6f14\u54e1",wiki:"Sun_Shu-mei",cats:["movie"],asia:true,hktw:true},
+  {name:"Liu Tao",zh:"\u5289\u6fe4",hint:"\u53f0\u7063\u8cc7\u6df1\u5973\u6f14\u54e1",wiki:"Liu_Tao_Taiwan",cats:["movie"],asia:true,hktw:true},
+  {name:"Chiang Hui",zh:"\u6c5f\u60e0",hint:"\u53f0\u7063\u8cc7\u6df1\u5973\u6f14\u54e1",wiki:"Chiang_Hui",cats:["movie"],asia:true,hktw:true},
+  {name:"Hsu Chih-wei",zh:"\u8a31\u5fd7\u5049",hint:"\u53f0\u7063\u8cc7\u6df1\u7537\u6f14\u54e1",wiki:"Hsu_Chih-wei",cats:["movie"],asia:true,hktw:true},
+  {name:"Eddy Ko",zh:"\u67ef\u53d4\u5143",hint:"\u53f0\u7063\u8cc7\u6df1\u7537\u6f14\u54e1",wiki:"Eddy_Ko",cats:["movie"],asia:true,hktw:true},
+  {name:"Brian Chang",zh:"\u5f35\u777f\u5bb6",hint:"\u85cd\u8272\u5927\u9580\u7537\u914d\u89d2\uff0c\u53f0\u7063\u7537\u6f14\u54e1",wiki:"Brian_Chang",cats:["movie"],asia:true,hktw:true},
+  {name:"Nikki Hsieh",zh:"\u8b1d\u76c8\u8431",hint:"\u7121\u8072\uff0c\u53f0\u7063\u6f14\u6280\u6d3e\u5973\u6f14\u54e1\uff0c\u91d1\u99ac\u5f71\u540e",wiki:"Nikki_Hsieh",cats:["movie"],asia:true,hktw:true},
+  {name:"Vivian Sung Actress",zh:"\u5b8b\u82b8\u6a3a3",hint:"\u6211\u7684\u5c11\u5973\u6642\u4ee3\u5973\u4e3b\u89d2\u4ee3\u8868",wiki:"Vivian_Sung_3",cats:["movie"],asia:true,hktw:true},
+  {name:"Wu Nien-hsuan",zh:"\u5433\u5ff5\u8ed2",hint:"\u523b\u5728\u4f60\u5fc3\u5e95\u7684\u540d\u5b57\u7537\u914d\u89d2\uff0c\u53f0\u7063\u7537\u6f14\u54e1",wiki:"Wu_Nien-hsuan",cats:["movie"],asia:true,hktw:true},
+  {name:"Sandy Lee",zh:"\u674e\u5fc3\u6f54",hint:"\u898b\u9b3c\uff0c\u53f0\u7063\u99ac\u4f86\u897f\u4e9e\u6df7\u8840\u5973\u6f14\u54e1",wiki:"Angelica_Lee",cats:["movie"],asia:true,hktw:true},
+  {name:"Annie Wu",zh:"\u5433\u5b89\u7d14",hint:"\u53f0\u7063\u5973\u6f14\u54e1",wiki:"Annie_Wu",cats:["movie"],asia:true,hktw:true},
+  {name:"Wang Ching-hsuan",zh:"\u738b\u6de83",hint:"\u8fd4\u6821\u5973\u4e3b\u89d2\uff0c\u53f0\u7063\u65b0\u751f\u4ee3\u6f14\u6280\u6d3e\u5973\u661f",wiki:"Gingle_Wang_3",cats:["movie"],asia:true,hktw:true},
+  {name:"Vera Yen",zh:"\u56b4\u6b63\u82b1",hint:"\u81ea\u7531\u6200\u611b\u7684\u57ce\u5e02\uff0c\u53f0\u7063\u5973\u6f14\u54e1",wiki:"Vera_Yen",cats:["movie"],asia:true,hktw:true},
+  {name:"Wu Pong-fong",zh:"\u5433\u670b\u5949",hint:"\u53f0\u7063\u5df2\u6545\u8cc7\u6df1\u7537\u6f14\u54e1",wiki:"Wu_Pong-fong",cats:["movie"],asia:true,hktw:true},
+  {name:"Liu Kuan-ting",zh:"\u5289\u51a0\u5ef7",hint:"\u967d\u5149\u666e\u7167\uff0c\u53f0\u7063\u6f14\u6280\u6d3e\u7537\u6f14\u54e1",wiki:"Liu_Kuan-ting",cats:["movie"],asia:true,hktw:true},
+  {name:"Chen Yu",zh:"\u9673\u96ea\u7504",hint:"\u8207\u60e1\u7684\u8ddd\u96e2\u5973\u4e3b\u89d2\uff0c\u53f0\u7063\u6f14\u6280\u6d3e",wiki:"Chen_Yu_actress",cats:["movie"],asia:true,hktw:true},
+  {name:"Yang Kuei-mei2",zh:"\u694a\u8cb4\u5a9a2",hint:"\u53f0\u7063\u8cc7\u6df1\u6f14\u6280\u6d3e\u5973\u661f\uff0c\u8521\u660e\u4eae\u96fb\u5f71\u5e38\u5ba2\u4ee3\u8868\u4f5c",wiki:"Yang_Kuei-mei_2",cats:["movie"],asia:true,hktw:true},
+  {name:"Wu Chun",zh:"\u5433\u5c0a",hint:"\u98db\u8f2a\u6d77\u524d\u6210\u54e1\uff0c\u6587\u840a\u738b\u5b50\u8840\u7d71\u7684\u53f0\u7063\u85dd\u4eba",wiki:"Wu_Chun",cats:["music"],asia:true,hktw:true},
+  {name:"Della Wu",zh:"\u5433\u5353\u6e90",hint:"\u53f0\u7063\u5275\u4f5c\u6b4c\u624b",wiki:"Della_Wu",cats:["music"],asia:true,hktw:true},
+  {name:"Crispy Wang",zh:"\u738b\u4fca\u5091",hint:"\u8106\u6a02\u5718\u4e3b\u5531",wiki:"Crispy_Wang",cats:["music"],asia:true,hktw:true},
+  {name:"Eli Wang",zh:"\u738b\u5f65\u667a",hint:"\u53f0\u7063\u5275\u4f5c\u6b4c\u624b",wiki:"Eli_Wang",cats:["music"],asia:true,hktw:true},
+  {name:"Hush",zh:"\u8a31\u66f8\u8c6a",hint:"\u53f0\u7063\u563b\u54c8\u5275\u4f5c\u6b4c\u624b",wiki:"Hush_(rapper)",cats:["music"],asia:true,hktw:true},
+  {name:"Leo Wang Rapper",zh:"\u5c0f\u8001\u95c6",hint:"\u53f0\u7063\u9952\u820c\u6b4c\u624b",wiki:"Leo_Wang_rapper",cats:["music"],asia:true,hktw:true},
+  {name:"OZI",zh:"OZI",hint:"\u53f0\u7063\u5275\u4f5c\u6b4c\u624b\uff0c\u6587\u85dd\u98a8\u683c\u4ee3\u8868",wiki:"OZI_(singer)",cats:["music"],asia:true,hktw:true},
+  {name:"9m88",zh:"9m88",hint:"\u53f0\u7063\u7235\u58eb\u9748\u9b42\u5973\u6b4c\u624b",wiki:"9m88",cats:["music"],asia:true,hktw:true},
+  {name:"Eric Kwok TW",zh:"\u845b\u4ef2\u73ca2",hint:"\u53f0\u7063\u9952\u820c\u5973\u6b4c\u624b\u4ee3\u8868",wiki:"Miss_Ko_2",cats:["music"],asia:true,hktw:true},
+  {name:"Penny Tai",zh:"\u6234\u4f69\u59ae",hint:"\u53f0\u7063\u5275\u4f5c\u624d\u5973\uff0c\u600e\u6a23\u7b49\u7d93\u5178\u91d1\u66f2",wiki:"Penny_Tai",cats:["music"],asia:true,hktw:true},
+  {name:"Joanna Wang",zh:"\u738b\u82e5\u7433",hint:"\u53f0\u7063\u7235\u58eb\u5275\u4f5c\u5973\u6b4c\u624b\uff0c\u7368\u7279\u55d3\u97f3",wiki:"Joanna_Wang",cats:["music"],asia:true,hktw:true},
+  {name:"Hsiao Hung-jen",zh:"\u5c0f\u5b87",hint:"\u53f0\u7063\u5275\u4f5c\u6b4c\u624b",wiki:"Xiao_Yu_singer",cats:["music"],asia:true,hktw:true},
+  {name:"Mando",zh:"\u66fc\u9640",hint:"\u53f0\u7063\u6b4c\u624b",wiki:"Mando_TW",cats:["music"],asia:true,hktw:true},
+  {name:"Nine Chen",zh:"\u9673\u96f6\u4e5d",hint:"\u53f0\u7063\u5275\u4f5c\u6b4c\u624b\uff0c\u7db2\u8def\u51fa\u9053\u8d70\u7d05",wiki:"Nine_Chen",cats:["music"],asia:true,hktw:true},
+  {name:"Tizzy Bac Band",zh:"\u60df\u6bc52",hint:"Tizzy Bac\u6a02\u5718\u4e3b\u5531\u4ee3\u8868",wiki:"Tizzy_Bac_2",cats:["music"],asia:true,hktw:true},
+  {name:"ShaoEn",zh:"\u5c11\u5b89",hint:"\u53f0\u7063\u5275\u4f5c\u6b4c\u624b",wiki:"ShaoEn",cats:["music"],asia:true,hktw:true},
+  {name:"Olivia Hong",zh:"\u6d2a\u5b89\u59ae",hint:"\u53f0\u7063\u5275\u4f5c\u5973\u6b4c\u624b",wiki:"Olivia_Hong",cats:["music"],asia:true,hktw:true},
+  {name:"Karencici",zh:"Karencici",hint:"\u53f0\u7063\u5275\u4f5c\u5973\u6b4c\u624b\uff0c\u7368\u7279\u66f2\u98a8\u4ee3\u8868",wiki:"Karencici",cats:["music"],asia:true,hktw:true},
+  {name:"Henry Hsu",zh:"\u8a31\u51cc\u777f",hint:"\u53f0\u7063\u6b4c\u624b",wiki:"Henry_Hsu_TW",cats:["music"],asia:true,hktw:true},
+  {name:"Cyndi Wang Singer2",zh:"\u738b\u5fc3\u51cc3",hint:"\u53f0\u7063\u751c\u5fc3\u6559\u4e3b\uff0c\u4e58\u98a8\u7834\u6d6a\u7684\u59d0\u59d0\u8b93\u5979\u7ffb\u7d05\u4ee3\u8868\u4f5c",wiki:"Cyndi_Wang_3",cats:["music"],asia:true,hktw:true},
+  {name:"Tank Singer2",zh:"\u5442\u5efa\u4e2d2",hint:"Tank\uff0c\u53f0\u7063\u7537\u6b4c\u624b\uff0c\u4e09\u570b\u604b\u7b49\u4ee3\u8868\u4f5c",wiki:"Tank_Taiwanese_singer_2",cats:["music"],asia:true,hktw:true},
+  {name:"Su Jia-chyuan",zh:"\u8607\u5609\u5168",hint:"\u53f0\u7063\u524d\u7acb\u6cd5\u9662\u9577\uff0c\u6c11\u9032\u9ee8\u8cc7\u6df1\u653f\u6cbb\u4eba\u7269",wiki:"Su_Jia-chyuan",cats:["history"],asia:true,hktw:true},
+  {name:"You Si-kun",zh:"\u6e38\u932b\u5803",hint:"\u53f0\u7063\u524d\u7acb\u6cd5\u9662\u9577\uff0c\u524d\u884c\u653f\u9662\u9577",wiki:"You_Si-kun",cats:["history"],asia:true,hktw:true},
+  {name:"Lai Shyh-bao",zh:"\u8cf4\u58eb\u8446",hint:"\u53f0\u7063\u8cc7\u6df1\u7acb\u59d4",wiki:"Lai_Shyh-bao",cats:["history"],asia:true,hktw:true},
+  {name:"Fu Kun-chi",zh:"\u5085\u5d10\u8401",hint:"\u53f0\u7063\u7acb\u6cd5\u9662\u526f\u9662\u9577",wiki:"Fu_Kun-chi",cats:["history"],asia:true,hktw:true},
+  {name:"Cynthia Wu",zh:"\u5433\u6b23\u76c8",hint:"\u53f0\u7063\u73fe\u4efb\u526f\u7e3d\u7d71\u5019\u9078\u4eba\u7d93\u6b77\uff0c\u570b\u6cf0\u91d1\u878d\u5bb6\u65cf",wiki:"Cynthia_Wu",cats:["history"],asia:true,hktw:true},
+  {name:"Jaw Shaw-kong",zh:"\u8d99\u5c11\u5eb7",hint:"\u53f0\u7063\u8cc7\u6df1\u653f\u6cbb\u8a55\u8ad6\u4eba\u7269\uff0c\u524d\u7acb\u59d4",wiki:"Jaw_Shaw-kong",cats:["history"],asia:true,hktw:true},
+  {name:"Hung Hsiu-chu",zh:"\u6d2a\u79c0\u67f1",hint:"\u53f0\u7063\u9996\u4f4d\u5973\u6027\u4e3b\u8981\u653f\u9ee8\u4e3b\u5e2d\u5019\u9078\u4eba",wiki:"Hung_Hsiu-chu",cats:["history"],asia:true,hktw:true},
+  {name:"Lin Ching-yi",zh:"\u6797\u975c\u5100",hint:"\u53f0\u7063\u7acb\u59d4\uff0c\u91ab\u5e2b\u51fa\u8eab\u7684\u653f\u6cbb\u4eba\u7269",wiki:"Lin_Ching-yi",cats:["history"],asia:true,hktw:true},
+  {name:"Tsai Pi-ru",zh:"\u8521\u74a7\u5982",hint:"\u53f0\u7063\u6c11\u773e\u9ee8\u8cc7\u6df1\u653f\u6cbb\u4eba\u7269",wiki:"Tsai_Pi-ru",cats:["history"],asia:true,hktw:true},
+  {name:"Wang Yi-chuan",zh:"\u738b\u7fa9\u5ddd",hint:"\u53f0\u7063\u6c11\u9032\u9ee8\u653f\u6cbb\u4eba\u7269\uff0c\u5a92\u9ad4\u8a55\u8ad6\u54e1\u51fa\u8eab",wiki:"Wang_Yi-chuan",cats:["history"],asia:true,hktw:true},
+  {name:"Chen Pei-yu",zh:"\u9673\u4f69\u742a",hint:"\u67ef\u6587\u54f2\u59bb\u5b50\uff0c\u53f0\u7063\u91ab\u5e2b",wiki:"Chen_Pei-yu",cats:["history"],asia:true,hktw:true},
+  {name:"Wu Den-yih",zh:"\u5433\u6566\u7fa9",hint:"\u53f0\u7063\u524d\u526f\u7e3d\u7d71\uff0c\u570b\u6c11\u9ee8\u524d\u4e3b\u5e2d",wiki:"Wu_Den-yih",cats:["history"],asia:true,hktw:true},
+  {name:"Hau Lung-pin",zh:"\u90dd\u9f8d\u658c",hint:"\u53f0\u5317\u5e02\u524d\u5e02\u9577\uff0c\u570b\u6c11\u9ee8\u8cc7\u6df1\u653f\u6cbb\u4eba\u7269",wiki:"Hau_Lung-pin",cats:["history"],asia:true,hktw:true},
+  {name:"Chen Chu Politics",zh:"\u9673\u83ca2",hint:"\u9ad8\u96c4\u5e02\u524d\u5e02\u9577\uff0c\u53f0\u7063\u8cc7\u6df1\u653f\u6cbb\u4eba\u7269\u4ee3\u8868",wiki:"Chen_Chu_2",cats:["history"],asia:true,hktw:true}
 ];
 
 
@@ -2100,7 +2145,7 @@ window._imgCache = window._imgCache || {};
 window._aiUsed = window._aiUsed || new Set();
 
 // ── State ──
-let playerCount=4, turnOrder=[], questions=[], currentQ=0;
+let playerCount=4, turnOrder=[], questions=[], currentQ=0, gameRounds=2;
 let gameMode='hard', gameType='solo';
 let teamA=3, teamB=3;
 let teamScores={A:0,B:0}, teamCorrect={A:0,B:0};
@@ -2129,15 +2174,21 @@ function setPhotoSecs(secs){
   const map={3:'time-3',5:'time-5',8:'time-8'};
   btnOn(document.getElementById(map[secs]),'linear-gradient(135deg,#2ecc71,#3dc8ff)','#2ecc71');
 }
+function setRounds(r){
+  gameRounds=r;
+  ['rounds-2','rounds-3','rounds-4','rounds-5'].forEach(id=>btnOff(document.getElementById(id)));
+  const map={2:'rounds-2',3:'rounds-3',4:'rounds-4',5:'rounds-5'};
+  btnOn(document.getElementById(map[r]),'linear-gradient(135deg,#ff5c93,#7b5cff)','#ff5c93');
+}
 function setCategory(cat){
   curCategory=cat;
-  ['cat-all','cat-sport','cat-music','cat-movie','cat-history','cat-asia','cat-hktw','cat-idol'].forEach(id=>btnOff(document.getElementById(id)));
-  const map={all:'cat-all',sport:'cat-sport',music:'cat-music',movie:'cat-movie',history:'cat-history',asia:'cat-asia',hktw:'cat-hktw',idol:'cat-idol'};
+  ['cat-all','cat-music','cat-movie','cat-asia','cat-hktw','cat-idol'].forEach(id=>btnOff(document.getElementById(id)));
+  const map={all:'cat-all',music:'cat-music',movie:'cat-movie',asia:'cat-asia',hktw:'cat-hktw',idol:'cat-idol'};
   btnOn(document.getElementById(map[cat]),'linear-gradient(135deg,#f0e040,#ff9500)','#f0e040');
 }
 function chgTeam(t,d){
-  if(t==='a') teamA=Math.max(1,Math.min(6,teamA+d));
-  else teamB=Math.max(1,Math.min(6,teamB+d));
+  if(t==='a') teamA=Math.max(1,Math.min(8,teamA+d));
+  else teamB=Math.max(1,Math.min(8,teamB+d));
   renderTeamSetup();
 }
 function renderTeamSetup(){
@@ -2164,7 +2215,7 @@ function buildOrder(n, rounds){
 }
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function chg(d){playerCount=Math.max(2,Math.min(8,playerCount+d));renderSetup();}
+function chg(d){playerCount=Math.max(2,Math.min(10,playerCount+d));renderSetup();}
 function renderSetup(){
   const o=buildOrder(playerCount);
   document.getElementById('c-num').textContent=playerCount;
@@ -2177,7 +2228,8 @@ function renderSetup(){
 async function getCelebImg(celeb){
   const key = celeb.name;
   if(window._imgCache[key] !== undefined) return window._imgCache[key];
-  if(celeb.img){ window._imgCache[key] = celeb.img; return celeb.img; }
+  if(celeb.img){ const r={src:celeb.img,isGroupFallback:false}; window._imgCache[key]=r; return r; }
+  if(celeb.no_img){ const r={src:null,isGroupFallback:false}; window._imgCache[key]=r; return r; }
 
   // 帶逾時的fetch，避免網路慢時卡住整個流程
   async function fetchWithTimeout(url, ms){
@@ -2194,14 +2246,14 @@ async function getCelebImg(celeb){
   }
 
   async function tryWiki(lang, title, minSize){
-    minSize = minSize || 220;
+    minSize = minSize || 150;
     try {
       const url = 'https://' + lang + '.wikipedia.org/w/api.php?action=query&titles=' + encodeURIComponent(title) + '&prop=pageimages&format=json&pithumbsize=800&origin=*';
-      const r = await fetchWithTimeout(url, 3000);
+      const r = await fetchWithTimeout(url, 5000);
       if(!r.ok) return null;
       const d = await r.json();
       const pages = d?.query?.pages || {};
-      const badWords = ['Incognito','Question_mark','Disambig','Flag_of','Coat_of','logo','Logo','Seal_of','_map','Map_of','icon','Icon','Emblem','symbol','Symbol'];
+      const badWords = ['Incognito','Question_mark','Disambig','Flag_of','Coat_of','logo','Logo','Seal_of','_map','Map_of','icon','Icon','Emblem','symbol','Symbol','Madame_Tussauds','waxwork','Waxwork'];
       for(const pid in pages){
         const thumb = pages[pid]?.thumbnail;
         const src = thumb?.source;
@@ -2216,14 +2268,15 @@ async function getCelebImg(celeb){
     return null;
   }
 
-  const minSize = celeb.is_group ? 380 : 220;
+  const minSize = celeb.is_group ? 300 : 150;
 
   // 第一步：用 wiki 標題查英文維基
   let src = null;
   if (celeb.wiki) src = await tryWiki('en', celeb.wiki, minSize);
   // 第二步：用英文名字直接查（標題可能跟wiki欄位不同）
   if (!src) src = await tryWiki('en', celeb.name.replace(/\s+/g, '_'), minSize);
-  // 第三步：用中文名查中文維基
+  // 第三步：用中文名查中文維基（若有專用消歧義標題zh_wiki則優先用它）
+  if (!src && celeb.zh_wiki) src = await tryWiki('zh', celeb.zh_wiki, minSize);
   if (!src && celeb.zh) src = await tryWiki('zh', celeb.zh, minSize);
   // 第四步：用英文維基搜尋API找最相近的條目再查圖
   if (!src) {
@@ -2237,9 +2290,12 @@ async function getCelebImg(celeb){
       }
     } catch(e) {}
   }
+  // 個人照片找不到時直接顯示提示卡，絕不退回團體合照（避免答案是個人卻配上多人照片造成混淆）
+  const isGroupFallback = false;
 
-  window._imgCache[key] = src || null;
-  return src || null;
+  const result = { src: src || null, isGroupFallback };
+  window._imgCache[key] = result;
+  return result;
 }
 
 // ── 2. AI 生成全球古今中外名人題庫 ──
@@ -2283,7 +2339,7 @@ async function startGame(){
     teamOf=Array.from({length:playerCount},(_,i)=>i<teamA?'A':'B');
     teamScores={A:0,B:0}; teamCorrect={A:0,B:0};
   }
-  turnOrder=buildOrder(playerCount);
+  turnOrder=buildOrder(playerCount, gameRounds);
   playerScores=Array(playerCount).fill(0);
   playerCorrect=Array(playerCount).fill(0);
   results=[];
@@ -2400,11 +2456,13 @@ async function loadQuestion(){
   const abortToken = (window._gameAborted || 0);
 
   // 整體安全網：getCelebImg最多等6秒，逾時就視為沒圖，絕不卡住遊戲
-  const src = await Promise.race([
+  const imgResult = await Promise.race([
     getCelebImg(q),
-    new Promise(resolve => setTimeout(() => resolve(null), 6000))
+    new Promise(resolve => setTimeout(() => resolve({src:null,isGroupFallback:false}), 6000))
   ]);
   if((window._gameAborted||0) !== abortToken) return;
+  const src = imgResult?.src;
+  const isGroupFallback = imgResult?.isGroupFallback;
 
   const triggerStart = () => {
     if((window._gameAborted||0) !== abortToken) return;
@@ -2416,6 +2474,8 @@ async function loadQuestion(){
     loadOv.innerHTML = '<div style="text-align:center;padding:24px;background:rgba(20,20,35,0.85);border-radius:20px;border:1px solid var(--border);max-width:300px;"><div style="font-size:3rem;margin-bottom:8px;">' + icon + '</div><div style="color:var(--accent);font-size:1.1rem;font-weight:bold;margin-bottom:8px;">' + title + '</div><div style="color:rgba(255,255,255,0.75);font-size:.85rem;line-height:1.5;">💡 ' + q.hint + '</div></div>';
     triggerStart();
   };
+
+  // 團體照退回機制已移除，此處無需再操作標籤元素
 
   if(src){
     img.src = src;
