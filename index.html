@@ -11,9 +11,14 @@
   --accent:#f0e040; --red:#ff4560; --green:#2ecc71; --muted:#666; --text:#f0f0f0;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{width:100%;height:100%;height:100dvh;overflow:hidden;background:var(--bg);color:var(--text);
+html,body{width:100%;height:100%;height:100dvh;overflow:hidden;background:#000;color:var(--text);
   font-family:'Noto Sans TC',sans-serif;touch-action:manipulation;}
-.screen{display:none;position:fixed;inset:0;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;overflow-y:auto;padding-top:max(24px,env(safe-area-inset-top));padding-bottom:max(24px,env(safe-area-inset-bottom));}
+/* 桌面/筆電大螢幕：整體限制成手機比例置中顯示，圖片不會被拉伸變形或超出範圍 */
+.screen{display:none;position:fixed;inset:0;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;overflow-y:auto;padding-top:max(24px,env(safe-area-inset-top));padding-bottom:max(24px,env(safe-area-inset-bottom));
+  left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg);}
+@media (min-width:481px){
+  .screen{box-shadow:0 0 60px rgba(0,0,0,.6);border-left:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08);}
+}
 .screen.active{display:flex;}
 
 /* ══ SETUP ══ */
